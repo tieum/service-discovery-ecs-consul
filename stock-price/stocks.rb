@@ -6,6 +6,12 @@ require 'csv'
 
 set :bind, '0.0.0.0'
 
+configure do
+  LOGGER = Logger.new("sinatra.log")
+  enable :logging, :dump_errors
+  set :raise_errors, true
+end
+
 # The URI to do the stock symbol lookup.
 # Returns a JSON document with stock name and price.
 get '/stock/:name' do
