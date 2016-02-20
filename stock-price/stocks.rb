@@ -3,6 +3,7 @@ require 'sinatra'
 require 'net/http'
 require 'json'
 require 'csv'
+require 'logger'
 
 set :bind, '0.0.0.0'
 
@@ -15,7 +16,7 @@ end
 # The URI to do the stock symbol lookup.
 # Returns a JSON document with stock name and price.
 get '/stock/:name' do
-  "Stock: #{params['name']}"
+  LOGGER.info("Stock: #{params['name']}")
   result = lookup_stock(params['name'])
   puts result
   convert_to_JSON(params['name'], result) if !result.nil?
